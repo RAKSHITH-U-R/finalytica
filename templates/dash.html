@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Stock Dashboard</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                    <th>Change (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in stock_data %}
+                <tr>
+                    <td>{{ stock['Symbol'] }}</td>
+                    <td>{{ stock['Price'] }}</td>
+                    <td {% if stock["Change"].iloc[0] > 0 %} class="text-success" {% else %} class="text-danger" {% endif %}>
+                        {{ stock['Change'].iloc[0] }}
+                    </td>                    
+                    <td {% if stock["Change Percent"].iloc[0] > 0 %} class="text-success" {% else %} class="text-danger" {% endif %}>
+                        {{ stock['Change Percent'].iloc[0] }}%
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
